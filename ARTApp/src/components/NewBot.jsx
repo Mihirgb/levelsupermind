@@ -21,8 +21,9 @@ const NewBot = () => {
         body: JSON.stringify({ input }),
       });
 
-      const data = await res.json();
+      const data =  await res.json();
       setResponse(data.response); // Update response with server message
+      console.log(data)
     } catch (error) {
       console.error("Error communicating with the server:", error);
       setResponse("Error: Unable to connect to the server.");
