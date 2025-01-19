@@ -3,6 +3,7 @@ from flask_cors import CORS
 import requests
 from dotenv import load_dotenv
 import os
+from llm import fetch_results
 
 load_dotenv()
 app = Flask(__name__)
@@ -72,6 +73,15 @@ def analyze():
         response = jsonify({"error": f"Server error: {str(e)}"})
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response, 500
+
+@app.route('/chat', methods=['POST'])
+def chat():
+    # Get JSON data from the client
+    data = request.get_json()
+    user_input = data.get('input', '')  # Extract 'input' from the request
+    resp = fetch_results(user_input)
+    # Respond with the same input
+    return jsonify({'response': str(resp)})
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
