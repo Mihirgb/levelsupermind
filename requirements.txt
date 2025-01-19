@@ -1,0 +1,9 @@
+flask
+dotenv
+flask-cors
+os
+google-generativeai
+jsonschmea
+requests
+google-api-python-client
+youtube-transcript-api
